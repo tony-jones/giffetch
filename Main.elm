@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Html
 import Html.Attributes
+import Html.Events exposing (..)
 
 main = view model
 
@@ -11,13 +12,19 @@ view model = Html.div
   [ pageStyling ]
   [
     Html.h1 [ headingStyling ] [ Html.text (Tuple.first model) ],
-    Html.button [ buttonStyling ] [Html.text "cats"],
-    Html.button [ buttonStyling ] [Html.text "dogs"],
-    Html.button [ buttonStyling ] [Html.text "ice cream"],
+    Html.button [ buttonStyling, Html.Events.onClick "asked for cats" ] [ Html.text "cats" ],
+    Html.button [ buttonStyling, Html.Events.onClick "asked for dogs" ] [ Html.text "dogs" ],
+    Html.button [ buttonStyling, Html.Events.onClick "asked for ice cream" ] [ Html.text "ice cream" ],
     Html.br [] [],
     Html.br [] [],
     Html.img [ imageStyling, Html.Attributes.src (Tuple.second model) ] []
   ]
+
+update message model =
+       if message == "asked for cats" then ("cats", image)
+  else if message == "asked for dogs" then ("dogs", image)
+  else if message == "asked for ice cream" then ("ice cream", image)
+  else model
 
 pageStyling = Html.Attributes.style [ ("text-align", "center") ]
 headingStyling =
