@@ -62,7 +62,6 @@ var _user$project$Main$pageStyling = _elm_lang$html$Html_Attributes$style(
 		_0: {ctor: '_Tuple2', _0: 'text-align', _1: 'center'},
 		_1: {ctor: '[]'}
 	});
-var _user$project$Main$model = {title: 'cats', picture: 'https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif'};
 var _user$project$Main$iceCreamPicture = 'https://media.giphy.com/media/QjagU0ONoQwCc/giphy.gif';
 var _user$project$Main$dogPicture = 'https://media.giphy.com/media/oJWx7MtpR2qdi/giphy.gif';
 var _user$project$Main$catPicture = 'https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif';
@@ -84,6 +83,11 @@ var _user$project$Main$update = F2(
 					{title: 'ice cream', picture: _user$project$Main$iceCreamPicture});
 		}
 	});
+var _user$project$Main$Model = F2(
+	function (a, b) {
+		return {title: a, picture: b};
+	});
+var _user$project$Main$model = A2(_user$project$Main$Model, 'cats', 'https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif');
 var _user$project$Main$AskedForIceCream = {ctor: 'AskedForIceCream'};
 var _user$project$Main$AskedForDogs = {ctor: 'AskedForDogs'};
 var _user$project$Main$AskedForCats = {ctor: 'AskedForCats'};
@@ -106,7 +110,7 @@ var _user$project$Main$view = function (model) {
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('cats'),
+					_0: _elm_lang$html$Html$text(model.title),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -166,18 +170,32 @@ var _user$project$Main$view = function (model) {
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$img,
-								{
-									ctor: '::',
-									_0: _user$project$Main$imageStyling,
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$src(model.picture),
-										_1: {ctor: '[]'}
-									}
-								},
+								_elm_lang$html$Html$br,
+								{ctor: '[]'},
 								{ctor: '[]'}),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$br,
+									{ctor: '[]'},
+									{ctor: '[]'}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$img,
+										{
+											ctor: '::',
+											_0: _user$project$Main$imageStyling,
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$src(model.picture),
+												_1: {ctor: '[]'}
+											}
+										},
+										{ctor: '[]'}),
+									_1: {ctor: '[]'}
+								}
+							}
 						}
 					}
 				}

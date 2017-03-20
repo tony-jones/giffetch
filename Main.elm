@@ -1,5 +1,3 @@
-module Main exposing (..)
-
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -14,19 +12,24 @@ catPicture = "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif"
 dogPicture = "https://media.giphy.com/media/oJWx7MtpR2qdi/giphy.gif"
 iceCreamPicture = "https://media.giphy.com/media/QjagU0ONoQwCc/giphy.gif" 
 
-model = { title = "cats",
-          picture = "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif" }
+type alias Model = { title : String, picture : String }
+model : Model
+model = Model "cats" "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif"
 
+view : Model -> Html Message
 view model = div
   [ pageStyling ]
   [
-    h1 [ headingStyling ] [ text "cats" ],
+    h1 [ headingStyling ] [ text model.title ],
     button [ buttonStyling, onClick AskedForCats ] [ text "cats" ],
     button [ buttonStyling, onClick AskedForDogs ] [ text "dogs" ],
     button [ buttonStyling, onClick AskedForIceCream ] [ text "ice cream" ],
+    br [] [],
+    br [] [],
     img [ imageStyling, src model.picture ] []
   ]
 
+update : Message -> Model -> Model
 update message model =
   case message of
     AskedForCats     -> { model | title = "cats",
