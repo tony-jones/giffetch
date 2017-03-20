@@ -1,61 +1,71 @@
 module Main exposing (..)
 
-import Html
-import Html.Attributes
-import Html.Events
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 
 main = Html.beginnerProgram { model = model,
                               view = view,
                               update = update }
 
-model = ("cats", "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif")
+type Message = AskedForCats | AskedForDogs | AskedForIceCream
 
-view model = Html.div
+catPicture = "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif"
+dogPicture = "https://media.giphy.com/media/oJWx7MtpR2qdi/giphy.gif"
+iceCreamPicture = "https://media.giphy.com/media/QjagU0ONoQwCc/giphy.gif" 
+
+model = { title = "cats",
+          picture = "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif" }
+
+view model = div
   [ pageStyling ]
   [
-    Html.h1 [ headingStyling ] [ Html.text (Tuple.first model) ],
-    Html.button [ buttonStyling, Html.Events.onClick "asked for cats" ] [ Html.text "cats" ],
-    Html.button [ buttonStyling, Html.Events.onClick "asked for dogs" ] [ Html.text "dogs" ],
-    Html.button [ buttonStyling, Html.Events.onClick "asked for ice cream" ] [ Html.text "ice cream" ],
-    Html.br [] [],
-    Html.br [] [],
-    Html.img [ imageStyling, Html.Attributes.src (Tuple.second model) ] []
+    h1 [ headingStyling ] [ text "cats" ],
+    button [ buttonStyling, onClick AskedForCats ] [ text "cats" ],
+    button [ buttonStyling, onClick AskedForDogs ] [ text "dogs" ],
+    button [ buttonStyling, onClick AskedForIceCream ] [ text "ice cream" ],
+    img [ imageStyling, src model.picture ] []
   ]
 
 update message model =
-       if message == "asked for cats" then ("cats", "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif")
-  else if message == "asked for dogs" then ("dogs", "https://media.giphy.com/media/oJWx7MtpR2qdi/giphy.gif")
-  else if message == "asked for ice cream" then ("ice cream", "https://media.giphy.com/media/QjagU0ONoQwCc/giphy.gif")
-  else model
+  case message of
+    AskedForCats     -> { model | title = "cats",
+                                  picture = catPicture }
 
+    AskedForDogs     -> { model | title = "dogs",
+                                  picture = dogPicture }
+
+    AskedForIceCream -> { model | title = "ice cream",
+                                  picture = iceCreamPicture }
 -- Styling
 
-pageStyling = Html.Attributes.style [ ("text-align", "center") ]
+pageStyling =
+    style [ ( "text-align", "center" ) ]
 
 headingStyling =
-  Html.Attributes.style
+    style
     [
-      ("font-size", "2em"),
-      ("color", "#333"),
+      ( "font-size", "2em" ),
+      ( "color", "#333" ),
       ("padding-bottom", "30px")
     ]
 
 buttonStyling =
-  Html.Attributes.style
-    [
-      ("padding", "10px"),
-      ("background-color", "#99ddff"),
-      ("border-radius", "2px"),
-      ("border", "1px solid #99ddff"),
-      ("color", "white"),
-      ("font-size", "1.5em"),
-      ("margin", "5px"),
-      ("cursor", "pointer")
-    ]
+    style
+      [
+        ( "padding", "10px" ),
+        ( "background-color", "#99ddff" ),
+        ( "border-radius", "2px" ),
+        ( "border", "1px solid #99ddff" ),
+        ( "color", "white" ),
+        ( "font-size", "1.5em" ),
+        ( "cursor", "pointer" ),
+        ( "margin", "5px")
+      ]
 
 imageStyling =
-  Html.Attributes.style
-    [
-      ("border-radius", "2px"),
-      ("box-shadow", "0 2px 4px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24)")
-    ]
+    style
+      [
+        ( "border-radius", "2px" ),
+        ( "box-shadow", "0 2px 4px rgba(0,0,0,0.12), 0 2px 3px rgba(0,0,0,0.24)")
+      ]

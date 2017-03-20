@@ -29,10 +29,10 @@ var _user$project$Main$buttonStyling = _elm_lang$html$Html_Attributes$style(
 							_0: {ctor: '_Tuple2', _0: 'font-size', _1: '1.5em'},
 							_1: {
 								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'margin', _1: '5px'},
+								_0: {ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'},
 								_1: {
 									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'},
+									_0: {ctor: '_Tuple2', _0: 'margin', _1: '5px'},
 									_1: {ctor: '[]'}
 								}
 							}
@@ -62,10 +62,31 @@ var _user$project$Main$pageStyling = _elm_lang$html$Html_Attributes$style(
 		_0: {ctor: '_Tuple2', _0: 'text-align', _1: 'center'},
 		_1: {ctor: '[]'}
 	});
+var _user$project$Main$model = {title: 'cats', picture: 'https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif'};
+var _user$project$Main$iceCreamPicture = 'https://media.giphy.com/media/QjagU0ONoQwCc/giphy.gif';
+var _user$project$Main$dogPicture = 'https://media.giphy.com/media/oJWx7MtpR2qdi/giphy.gif';
+var _user$project$Main$catPicture = 'https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif';
 var _user$project$Main$update = F2(
 	function (message, model) {
-		return _elm_lang$core$Native_Utils.eq(message, 'asked for cats') ? {ctor: '_Tuple2', _0: 'cats', _1: 'https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif'} : (_elm_lang$core$Native_Utils.eq(message, 'asked for dogs') ? {ctor: '_Tuple2', _0: 'dogs', _1: 'https://media.giphy.com/media/oJWx7MtpR2qdi/giphy.gif'} : (_elm_lang$core$Native_Utils.eq(message, 'asked for ice cream') ? {ctor: '_Tuple2', _0: 'ice cream', _1: 'https://media.giphy.com/media/QjagU0ONoQwCc/giphy.gif'} : model));
+		var _p0 = message;
+		switch (_p0.ctor) {
+			case 'AskedForCats':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{title: 'cats', picture: _user$project$Main$catPicture});
+			case 'AskedForDogs':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{title: 'dogs', picture: _user$project$Main$dogPicture});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{title: 'ice cream', picture: _user$project$Main$iceCreamPicture});
+		}
 	});
+var _user$project$Main$AskedForIceCream = {ctor: 'AskedForIceCream'};
+var _user$project$Main$AskedForDogs = {ctor: 'AskedForDogs'};
+var _user$project$Main$AskedForCats = {ctor: 'AskedForCats'};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -85,8 +106,7 @@ var _user$project$Main$view = function (model) {
 				},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text(
-						_elm_lang$core$Tuple$first(model)),
+					_0: _elm_lang$html$Html$text('cats'),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -98,7 +118,7 @@ var _user$project$Main$view = function (model) {
 						_0: _user$project$Main$buttonStyling,
 						_1: {
 							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick('asked for cats'),
+							_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AskedForCats),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -116,7 +136,7 @@ var _user$project$Main$view = function (model) {
 							_0: _user$project$Main$buttonStyling,
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick('asked for dogs'),
+								_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AskedForDogs),
 								_1: {ctor: '[]'}
 							}
 						},
@@ -134,7 +154,7 @@ var _user$project$Main$view = function (model) {
 								_0: _user$project$Main$buttonStyling,
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick('asked for ice cream'),
+									_0: _elm_lang$html$Html_Events$onClick(_user$project$Main$AskedForIceCream),
 									_1: {ctor: '[]'}
 								}
 							},
@@ -146,39 +166,23 @@ var _user$project$Main$view = function (model) {
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$br,
-								{ctor: '[]'},
-								{ctor: '[]'}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$br,
-									{ctor: '[]'},
-									{ctor: '[]'}),
-								_1: {
+								_elm_lang$html$Html$img,
+								{
 									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$img,
-										{
-											ctor: '::',
-											_0: _user$project$Main$imageStyling,
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$src(
-													_elm_lang$core$Tuple$second(model)),
-												_1: {ctor: '[]'}
-											}
-										},
-										{ctor: '[]'}),
-									_1: {ctor: '[]'}
-								}
-							}
+									_0: _user$project$Main$imageStyling,
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$src(model.picture),
+										_1: {ctor: '[]'}
+									}
+								},
+								{ctor: '[]'}),
+							_1: {ctor: '[]'}
 						}
 					}
 				}
 			}
 		});
 };
-var _user$project$Main$model = {ctor: '_Tuple2', _0: 'cats', _1: 'https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif'};
 var _user$project$Main$main = _elm_lang$html$Html$beginnerProgram(
 	{model: _user$project$Main$model, view: _user$project$Main$view, update: _user$project$Main$update})();
