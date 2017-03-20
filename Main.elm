@@ -3,17 +3,20 @@ module Main exposing (..)
 import Html
 import Html.Attributes
 
-{- other page elements -}
-main = Html.div
+main = view model
+
+model = ("cats", "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif")
+
+view model = Html.div
   [ pageStyling ]
   [
-    Html.h1 [ headingStyling ] [Html.text "cats"],
+    Html.h1 [ headingStyling ] [ Html.text (Tuple.first model) ],
     Html.button [ buttonStyling ] [Html.text "cats"],
     Html.button [ buttonStyling ] [Html.text "dogs"],
     Html.button [ buttonStyling ] [Html.text "ice cream"],
     Html.br [] [],
     Html.br [] [],
-    Html.img [ imageStyling, Html.Attributes.src "https://media.giphy.com/media/11s7Ke7jcNxCHS/giphy.gif" ] []
+    Html.img [ imageStyling, Html.Attributes.src (Tuple.second model) ] []
   ]
 
 pageStyling = Html.Attributes.style [ ("text-align", "center") ]
