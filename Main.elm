@@ -2,9 +2,11 @@ module Main exposing (..)
 
 import Html
 import Html.Attributes
-import Html.Events exposing (..)
+import Html.Events
 
-main = view model
+main = Html.beginnerProgram { model = model,
+                              view = view,
+                              update = update }
 
 model = ("cats", "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif")
 
@@ -21,12 +23,15 @@ view model = Html.div
   ]
 
 update message model =
-       if message == "asked for cats" then ("cats", image)
-  else if message == "asked for dogs" then ("dogs", image)
-  else if message == "asked for ice cream" then ("ice cream", image)
+       if message == "asked for cats" then ("cats", "https://media.giphy.com/media/ND6xkVPaj8tHO/giphy.gif")
+  else if message == "asked for dogs" then ("dogs", "https://media.giphy.com/media/oJWx7MtpR2qdi/giphy.gif")
+  else if message == "asked for ice cream" then ("ice cream", "https://media.giphy.com/media/QjagU0ONoQwCc/giphy.gif")
   else model
 
+-- Styling
+
 pageStyling = Html.Attributes.style [ ("text-align", "center") ]
+
 headingStyling =
   Html.Attributes.style
     [
